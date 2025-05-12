@@ -11,3 +11,11 @@ class Player:
     
     def print_stats(self):
         print(f"Health: {self.health}\nStrength: {self.strength}\nDefense: {self.defense}\nDexterity: {self.dexterity}")
+
+    def stat_upgrade(self, stat, value):
+        if stat == "health": self.health += value
+        if stat == "strength": self.strength += value 
+        if stat == "defense": self.defense += value
+        if stat == "dexterity": self.dexterity += value
+
+
