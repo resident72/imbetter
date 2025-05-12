@@ -1,7 +1,7 @@
 import os, time, random
 from colorama import Fore, Style, init
 from Player import Player
-from Choice import Choice
+
 init()
 
 def clear(timer=0):
@@ -42,12 +42,7 @@ characters = [
 choice = choices(character_choices)
 player = characters[choice]
 
-question1 =[
-    Choice("You gay?","Yup","strenght",2),
-    Choice("You Straight?","YUP","defense",3)
-]
-
-
+choices("You find a chest.", {"Open it":f"Nothing happens {player.stat_upgrade("strength", 100)}", "Examine":"you're gay as hell"})
 
 
 
