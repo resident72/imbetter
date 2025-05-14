@@ -9,28 +9,23 @@ def clear(timer=0):
     os.system("cls")
 
 
-def choices(choice_list):                                                   #temporary variable in the function (parameter)
-    for parameter in choice_list: print(parameter)
+def choices(event, choice_dic):    
+    print(event)                                
+    for parameter in choice_dic: print(parameter)
     choice = 0
-    while choice not in range(1, len(choice_list)):
+    keys = list(choice_dic.keys())
+    while choice not in range(1, len(choice_dic) + 1):
         choice = input("What you wanna do? ")
         if choice.isdigit():
-            choice = int(choice)
-            print(f"You chose: {choice}.")   
-            if choice not in range(1, len(choice_list) + 1):
+            choice = int(choice)                     
+            if choice not in range(1, len(choice_dic) + 1):
                 print("!Invalid choice, please use the numbers provided below!")   
                 choice = -1                     
         else:   
             choice = -1
             print("!Invalid choice, please use the numbers provided below!")
+    print(choice_dic[keys[choice - 1]])
     return choice - 1
-
-character_choices = [
-f"[1] {Fore.WHITE}Vanguard: Health: {Fore.GREEN}25{Style.RESET_ALL}  Strength: {Fore.RED}15{Style.RESET_ALL}  Defense: {Fore.BLUE}25{Style.RESET_ALL}  Dexterity: {Fore.YELLOW}10{Style.RESET_ALL}",
-f"[2] {Fore.WHITE}Warrior: Health: {Fore.GREEN}20{Style.RESET_ALL}  Strength: {Fore.RED}20{Style.RESET_ALL}  Defense: {Fore.BLUE}15{Style.RESET_ALL}  Dexterity: {Fore.YELLOW}15{Style.RESET_ALL}",
-f"[3] {Fore.WHITE}Thief: Health: {Fore.GREEN}15{Style.RESET_ALL}  Strength: {Fore.RED}10{Style.RESET_ALL}  Defense: {Fore.BLUE}10{Style.RESET_ALL}  Dexterity: {Fore.YELLOW}30{Style.RESET_ALL}",
-f"[4] {Fore.WHITE}Slave: Health: {Fore.GREEN}10{Style.RESET_ALL}  Strength: {Fore.RED}5{Style.RESET_ALL}  Defense: {Fore.BLUE}5{Style.RESET_ALL}  Dexterity: {Fore.YELLOW}5{Style.RESET_ALL}"
-]
 
 characters = [
     Player("Vanguard", 25, 15, 25, 10),
@@ -39,16 +34,27 @@ characters = [
     Player("Slave", 10, 5, 5, 5)
 ]
 
-choice = choices(character_choices)
+character_choices = {
+f"[1] {Fore.WHITE}Vanguard: Health: {Fore.GREEN}25{Style.RESET_ALL}  Strength: {Fore.RED}15{Style.RESET_ALL}  Defense: {Fore.BLUE}25{Style.RESET_ALL}  Dexterity: {Fore.YELLOW}10{Style.RESET_ALL}": 0,
+f"[2] {Fore.WHITE}Warrior: Health: {Fore.GREEN}20{Style.RESET_ALL}  Strength: {Fore.RED}20{Style.RESET_ALL}  Defense: {Fore.BLUE}15{Style.RESET_ALL}  Dexterity: {Fore.YELLOW}15{Style.RESET_ALL}": 1,
+f"[3] {Fore.WHITE}Thief: Health: {Fore.GREEN}15{Style.RESET_ALL}  Strength: {Fore.RED}10{Style.RESET_ALL}  Defense: {Fore.BLUE}10{Style.RESET_ALL}  Dexterity: {Fore.YELLOW}30{Style.RESET_ALL}" : 2,
+f"[4] {Fore.WHITE}Slave: Health: {Fore.GREEN}10{Style.RESET_ALL}  Strength: {Fore.RED}5{Style.RESET_ALL}  Defense: {Fore.BLUE}5{Style.RESET_ALL}  Dexterity: {Fore.YELLOW}5{Style.RESET_ALL}" : 3
+}
+
+
+
+choice = choices("", character_choices)
 player = characters[choice]
-
-choices("You find a chest.", {"Open it":f"Nothing happens {player.stat_upgrade("strength", 100)}", "Examine":"you're gay as hell"})
-
-
-
 print(f"You chose the {player.name}!")
+player.print_stats()
+
+
+choices("You find a chest.", {"Open it":f"Nothing happens {player.stat_upgrade("strength", 1000)}", "Examine":"you're gay as hell"})
+
+
 
 player.print_stats()
+
 
 
 
