@@ -17,5 +17,5 @@ class Player:
         if stat == "strength": self.strength += value 
         if stat == "defense": self.defense += value
         if stat == "dexterity": self.dexterity += value
-
+        return ""
 
